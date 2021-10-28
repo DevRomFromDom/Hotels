@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./LoginForm.module.scss";
-import Input from "../../components";
+import StyledInput from "../../components";
 import { validation } from "./validation";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
@@ -20,10 +20,9 @@ const LoginForm = () => {
         const result = await validation(login, password);
         if (result?.error) {
             setError(result);
-            console.log(result, error);
         } else {
             dispatch(logIn());
-            history.push("/");
+            history.push("/content");
             localStorage.setItem("isLoggedIn", "true");
         }
     };
@@ -37,22 +36,24 @@ const LoginForm = () => {
     const styledInput = classNames(styles.login_input, { [styles.error]: error.errors.login });
     const styledBtn = classNames(styles.btn, { [styles.error]: error.errors.password });
 
+
     return (
         <div className={styles.loginform__wrapper}>
             <div className={styles.loginform_container}>
                 <div className={styles.loginform__title}>Simple Hotel Check</div>
                 <form className={styles.login__form} onSubmit={(e) => handleSubmit(e)}>
                     <div className={styledInput}>
-                        <Input
+                        <StyledInput
                             title={"Логин"}
                             value={login}
                             onChange={handleLoginChange}
                             autoFocus={true}
                             error={error.error ? { error: error.error, text: error.errors.login } : undefined}
+                          
                         />
                     </div>
                     <div className={styles.password__input}>
-                        <Input
+                        <StyledInput
                             title={"Пароль"}
                             type={"password"}
                             value={password}

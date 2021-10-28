@@ -1,31 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn } from "./store";
 
 interface PrivateRouteProps {
     path: string;
     exact?: boolean;
-    component?: () => JSX.Element;
-    isLoggedIn: boolean;
+    Component?: () => JSX.Element;
+    isLoggedIn?: boolean;
 }
 
 export const PrivateRoute = (props: PrivateRouteProps) => {
-    const { component, isLoggedIn, ...rest } = props;
+    const dispatch = useDispatch();
+    const { Component, isLoggedIn, path, ...rest } = props;
     const LSisLoggedIn = localStorage.getItem("isLoggedIn");
-    return (
-        <Route
-            {...rest}
-            component={component}
-            render={(props) =>
-                isLoggedIn || LSisLoggedIn === "true" ? (
-                    <Redirect to={{ pathname: "/content" }} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                        }}
-                    />
-                )
-            }
-        />
-    );
+    useEffect(() => {
+        if (!isLoggedIn && LSisLoggedIn === "true") {
+            dispatch(logIn());
+        }
+    }, [dispatch, isLoggedIn, LSisLoggedIn]);
+
+    if (isLoggedIn || LSisLoggedIn === "true") {
+        if (path === "/") {
+            return <Redirect to={{ pathname: "/content" }} />;
+        } else {
+            return <Route {...rest} component={Component} />;
+        }
+    } else {
+        return <Redirect to={{ pathname: "/login" }} />;
+    }
 };

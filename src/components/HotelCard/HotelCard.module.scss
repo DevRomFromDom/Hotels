@@ -1,0 +1,55 @@
+.hotel__card_wrapper {
+    display: grid;
+    grid-template-areas: "name Ficon" "range ." "rating price";
+    flex-grow: 1;
+}
+.hotel__name {
+    grid-area: name;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 22px;
+    color: #424242;
+    letter-spacing: -0.408px;
+}
+.favorite__icon {
+    grid-area: Ficon;
+    display: flex;
+    justify-content: flex-end;
+}
+.date__range {
+    grid-area: range;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #878787;
+}
+.rating {
+    grid-area: rating;
+    margin: 7px 0 0 0;
+}
+.price {
+    grid-area: price;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    display: flex;
+    justify-content: flex-end;
+    color: #878787;
+}
+.price__cost {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 22px;
+    color: #424242;
+    margin-left: 18px;
+}

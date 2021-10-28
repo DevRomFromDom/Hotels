@@ -2,8 +2,18 @@ import React, { useEffect, useState } from "react";
 import { TextField, FormControl, InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+interface InputProps {
+    title?: string;
+    type?: string;
+    value?: any;
+    onChange: (value: any) => any;
+    autoFocus?: boolean;
+    error?: { error?: boolean; text?: string };
+    bold?: boolean;
+}
+
 const StyledTextField = styled(TextField)({
-    "&.MuiFormControl-root": {
+    "& .MuiFormControl-root": {
         width: "100%",
     },
     fieldset: {
@@ -24,66 +34,61 @@ const StyledTextField = styled(TextField)({
         fontSize: "16px",
         lineHeight: "18px",
     },
-    "& .Mui-error":{
+    "& .Mui-error": {
         input: {
-            color: "red"
-        }
-    }
+            color: "red",
+        },
+    },
 });
-const StyledInputLabel = styled(InputLabel)({
+
+const StyledInputLabel = styled(InputLabel, {
+    shouldForwardProp: (prop) => prop !== "bold",
+})<{ bold: boolean }>(({ bold }) => ({
     "&.MuiInputLabel-root": {
         fontStyle: "normal",
-        fontWeight: 300,
         fontSize: "19px",
         fontFamily: "Roboto",
         lineHeight: "19px",
         top: "-20px",
+        fontWeight: bold ? 500 : 300,
+        color: bold ? "#424242" : "",
     },
-});
+}));
 
-interface InputProps {
-    title?: string;
-    type?: string;
-    value: string;
-    onChange?: (value: any) => void;
-    autoFocus?: boolean;
-    error?: { error?: boolean; text?: string };
-}
-
-const Input = (props: InputProps) => {
-    const { title, type, value, onChange, autoFocus, error } = props;
+const StyledInput = (props: InputProps) => {
+    const { title, type, onChange, autoFocus, value = "", error, bold = false } = props;
     const [inputValue, setInputValue] = useState(value);
-    useEffect(() => {
-        if (onChange) {
-            onChange(inputValue);
-        }
-    }, [inputValue, onChange]);
 
     const handleChange = (e: any) => {
         setInputValue(e.target.value);
     };
 
+    useEffect(() => {
+        onChange(inputValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [inputValue]);
+
     return (
         <>
             <FormControl variant='standard' fullWidth={true}>
-                <StyledInputLabel shrink htmlFor={`${title}-input`} error={error?.error}>
+                <StyledInputLabel shrink htmlFor={`${title}-input`} error={error?.error} bold={bold}>
                     {title}
                 </StyledInputLabel>
                 <StyledTextField
-                    name={type}
+                    name={title}
                     autoFocus={autoFocus}
                     autoComplete='off'
                     id={`${title}-input`}
                     value={inputValue}
-                    onChange={(e) => handleChange(e)}
+                    onChange={handleChange}
                     error={error?.error}
                     helperText={error?.text}
                     type={type}
-                    InputProps={{error: error?.error }}
+                    InputProps={{ error: error?.error }}
                 />
             </FormControl>
         </>
     );
 };
 
-export default Input;
+export default StyledInput;
