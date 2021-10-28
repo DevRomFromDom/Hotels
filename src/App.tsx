@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./App.module.scss";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, HashRouter as Router, Route } from "react-router-dom";
 import Content from "./Content";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
