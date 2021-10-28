@@ -1,5 +1,5 @@
 {
-    "homepage": "https://devromfromdom.github.io/Hotels",
+    "homepage": "https://devromfromdom.github.io/Hotels/",
     "name": "hotels",
     "version": "0.1.0",
     "private": true,
@@ -33,7 +33,7 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "predeploy": "yarn run build",
+        "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
         "start": "react-scripts start",
         "build": "react-scripts build",
