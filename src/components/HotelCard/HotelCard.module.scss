@@ -1,6 +1,6 @@
 .hotel__card_wrapper {
     display: grid;
-    grid-template-areas: "name Ficon" "range ." "rating price";
+    grid-template-areas: "name name name Ficon" "range range range ." "rating rating price price";
     flex-grow: 1;
 }
 .hotel__name {
