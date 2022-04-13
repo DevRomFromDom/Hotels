@@ -9,7 +9,7 @@
     font-style: normal;
     font-weight: 300;
     font-size: 17px;
-    line-height: 22px;
+    line-height: 21px;
     color: #424242;
     letter-spacing: -0.408px;
 }
@@ -24,13 +24,14 @@
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    line-height: 22px;
+    line-height: 21px;
     letter-spacing: -0.408px;
     color: #878787;
 }
 .rating {
     grid-area: rating;
-    margin: 7px 0 0 0;
+    margin: 5px 0 0 0;
+    max-height: 17px;
 }
 .price {
     grid-area: price;

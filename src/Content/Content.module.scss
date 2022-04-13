@@ -39,14 +39,17 @@
     display: grid;
     grid-template-areas: "search main" "favorites main" ;
     grid-gap: 24px;
-    grid-template-rows: 424px auto;
+    grid-template-rows: 410px auto;
+    max-height: 906px;
 }
 .search__form {
     grid-area: search;
+    max-height: 410px;
 }
 .favorites {
     grid-area: favorites;
 }
 .main__container {
     grid-area: main;
+    max-height: 902px;
 }

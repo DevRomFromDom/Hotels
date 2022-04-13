@@ -4,7 +4,7 @@ import { ReactComponent as LogOut } from "../images/svg/log out.svg";
 import SearchForm from "./SearchForm";
 import Favorites from "./Favorites";
 import MainContainer from "./Main";
-import Card from "../components/Card";
+import Wrapper from "../components/Wrapper";
 import { useDispatch } from "react-redux";
 import { logOut } from "../store";
 
@@ -12,7 +12,7 @@ const Content = () => {
     const dispatch = useDispatch();
     const hangleLogOut = () => {
         dispatch(logOut());
-        localStorage.removeItem("isLoggedIn")
+        localStorage.removeItem("isLoggedIn");
     };
     return (
         <div className={styles.content__wrapper}>
@@ -27,13 +27,19 @@ const Content = () => {
             <div className={styles.main__content_wrapper}>
                 <div className={styles.content__container}>
                     <div className={styles.search__form}>
-                        <Card children={SearchForm} />
+                        <Wrapper>
+                            <SearchForm />
+                        </Wrapper>
                     </div>
                     <div className={styles.favorites}>
-                        <Card children={Favorites} />
+                        <Wrapper>
+                            <Favorites />
+                        </Wrapper>
                     </div>
                     <div className={styles.main__container}>
-                        <Card children={MainContainer} />
+                        <Wrapper>
+                            <MainContainer />
+                        </Wrapper>
                     </div>
                 </div>
             </div>

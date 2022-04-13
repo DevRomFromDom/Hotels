@@ -26,7 +26,10 @@ const StyledTextField = styled(TextField)({
         fontStyle: "normal",
         fontWeight: 300,
         fontSize: "16px",
-        lineHeight: "18px",
+        lineHeight: "20px",
+        padding: "17px",
+        height: "1rem",
+        width: "266px"
     },
     "& .Mui-error": {
         input: {
@@ -43,27 +46,27 @@ const StyledInputLabel = styled(InputLabel)({
         lineHeight: "19px",
         top: "-20px",
         color: "#424242",
+        "&.Mui-error": {
+            color: "red",
+        },
     },
 });
 
 interface DatePicerProps {
-    value: Date;
+    value: Date | null;
     onChange: (value: Date) => void;
+    error?: { error: boolean; text: string };
 }
 
 const StyledDatePicker = (props: DatePicerProps) => {
-    const { onChange, value } = props;
+    const { onChange, value, error } = props;
     const [dataPickerValue, setDataPickerValue] = useState<Date>(new Date());
-
     useEffect(() => {
-        if (value.toString() !== dataPickerValue.toString()) {
+        if (value !== dataPickerValue) {
             onChange(dataPickerValue);
         }
     }, [dataPickerValue, onChange, value]);
 
-    const handleChange = (newValue: any) => {
-        setDataPickerValue(newValue);
-    };
     return (
         <>
             <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
@@ -71,14 +74,19 @@ const StyledDatePicker = (props: DatePicerProps) => {
                     mask='__.__.____'
                     value={dataPickerValue}
                     onChange={(newValue: any) => {
-                        handleChange(newValue);
+                        setDataPickerValue(newValue);
                     }}
                     renderInput={(params) => (
                         <FormControl variant='standard' fullWidth={true}>
-                            <StyledInputLabel shrink htmlFor={"date-picker"}>
+                            <StyledInputLabel shrink htmlFor={"date-picker"} error={error?.error}>
                                 {"Дата заселения"}
                             </StyledInputLabel>
-                            <StyledTextField {...params} id={"date-picker"} />
+                            <StyledTextField
+                                {...params}
+                                id={"date-picker"}
+                                error={error?.error ? true : undefined}
+                                helperText={error ? error.text : ""}
+                            />
                         </FormControl>
                     )}
                 />

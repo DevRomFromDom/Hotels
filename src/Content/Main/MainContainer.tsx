@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getHotels, RootState } from "../../store";
 import { hotelInfo } from "../../store/reducers/hotelsReducer";
 import { SearchOptions } from "../../store/reducers/searchOptionsReducer";
+import { pluralNames } from "../../helpers";
 
 const MainContainer = () => {
     const options: SearchOptions = useSelector((state: RootState) => state.searchOptions);
@@ -40,24 +41,23 @@ const MainContainer = () => {
             <div className={styles.maincontainer_slider}>
                 <Carusel />
             </div>
-            <div className={styles.hotel__couner}>
-                Добавлено в Избранное: <span className={styles.couner}>{favorites.length}</span> отеля
+            <div className={styles.hotel__counter}>
+                Добавлено в Избранное: <span className={styles.counter}>{favorites.length}&nbsp;</span>
+                {pluralNames(favorites.length, "отель", "отеля", "отелей")}
             </div>
             <div className={styles.hotels__list}>
-                {hotels.length !== 0 ? (
-                    hotels.map((el: hotelInfo) => {
-                        return (
-                            <div className={styles.hotel_card} key={el.hotelId}>
-                                <div className={styles.house_icon} />
-                                <div className={styles.hotelcard__wrapper}>
-                                    <HotelCard {...{ ...el, options }} />
-                                </div>
-                            </div>
-                        );
-                    })
-                ) : (
-                   null
-                )}
+                {hotels.length !== 0
+                    ? hotels.map((el: hotelInfo) => {
+                          return (
+                              <div className={styles.hotel_card} key={el.hotelId}>
+                                  <div className={styles.house_icon} />
+                                  <div className={styles.hotelcard__wrapper}>
+                                      <HotelCard {...{ ...el, options }} />
+                                  </div>
+                              </div>
+                          );
+                      })
+                    : null}
             </div>
         </div>
     );

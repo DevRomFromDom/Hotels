@@ -32,11 +32,14 @@ const StyledTextField = styled(TextField)({
         fontStyle: "normal",
         fontWeight: 300,
         fontSize: "16px",
-        lineHeight: "18px",
+        lineHeight: "20px",
+        padding: "17px",
+        height: "1rem",
+        width: "266px",
     },
     "& .Mui-error": {
         input: {
-            color: "red",
+            color: "#EB1717",
         },
     },
 });
@@ -52,6 +55,9 @@ const StyledInputLabel = styled(InputLabel, {
         top: "-20px",
         fontWeight: bold ? 500 : 300,
         color: bold ? "#424242" : "",
+        "&.Mui-error": {
+            color: "red",
+        },
     },
 }));
 
@@ -65,7 +71,7 @@ const StyledInput = (props: InputProps) => {
 
     useEffect(() => {
         onChange(inputValue);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputValue]);
 
     return (
@@ -84,7 +90,7 @@ const StyledInput = (props: InputProps) => {
                     error={error?.error}
                     helperText={error?.text}
                     type={type}
-                    InputProps={{ error: error?.error }}
+                    InputProps={{ error: error?.error, inputProps: type === "number" ? { min: 0 } : undefined }}
                 />
             </FormControl>
         </>

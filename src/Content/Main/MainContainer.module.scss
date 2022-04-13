@@ -1,7 +1,7 @@
 .maincontainer__wrapper {
     width: 664px;
-    height: 830px;
-    margin: 15px 0;
+    height: 810px;
+    margin: 12px 0;
 }
 .main_content__header {
     display: flex;
@@ -36,7 +36,7 @@
     color: #41522e;
 }
 
-.hotel__couner {
+.hotel__counter {
     font-family: Roboto;
     font-style: normal;
     font-weight: 300;
@@ -44,9 +44,9 @@
     line-height: 22px;
     letter-spacing: -0.408px;
     color: #424242;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
 }
-.couner {
+.counter {
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
@@ -59,7 +59,7 @@
 .hotels__list{
     display: flex;
     flex-direction: column;
-    max-height: 530px;
+    max-height: 529px;
     position: relative;
     width: 100%;
     overflow-y: auto;
@@ -85,6 +85,6 @@
 .hotelcard__wrapper{
     display: flex;
     flex-grow: 1;
-    padding: 19px 0 15px 0;
+    padding: 19px 0 16px 0;
     
 }

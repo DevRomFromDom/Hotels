@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styles from "./LoginForm.module.scss";
 import StyledInput from "../../components";
-import { validation } from "./validation";
+import { validationLogin } from "../../helpers";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../store";
 import { useHistory } from "react-router-dom";
+import { ILoginValidationError } from "../../helpers/validation";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -15,10 +16,9 @@ const LoginForm = () => {
     const [error, setError] = useState({ error: false, errors: { login: "", password: "" } });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        setError({ error: false, errors: { login: "", password: "" } });
         e.preventDefault();
-        const result = await validation(login, password);
-        if (result?.error) {
+        const result: ILoginValidationError = await validationLogin(login, password);
+        if (result.error) {
             setError(result);
         } else {
             dispatch(logIn());
@@ -36,7 +36,6 @@ const LoginForm = () => {
     const styledInput = classNames(styles.login_input, { [styles.error]: error.errors.login });
     const styledBtn = classNames(styles.btn, { [styles.error]: error.errors.password });
 
-
     return (
         <div className={styles.loginform__wrapper}>
             <div className={styles.loginform_container}>
@@ -49,7 +48,6 @@ const LoginForm = () => {
                             onChange={handleLoginChange}
                             autoFocus={true}
                             error={error.error ? { error: error.error, text: error.errors.login } : undefined}
-                          
                         />
                     </div>
                     <div className={styles.password__input}>
